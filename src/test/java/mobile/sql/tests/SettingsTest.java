@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.sleep;
 
-@Tag("mobile")
+
 public class SettingsTest extends MobileTestBase {
 
     SqlPracticeScreen sqlScreen = new SqlPracticeScreen();

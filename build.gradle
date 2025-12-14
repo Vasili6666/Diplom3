@@ -65,17 +65,17 @@ tasks.withType(Test) {
     }
 }
 
-// Задача для запуска всех мобильных тестов
-task mobile_test(type: Test) {
-    group = "verification"
-    description = "Run only MOBILE tests"
-    useJUnitPlatform {
-        includeTags("mobile")
-    }
-}
-
-// Задача по умолчанию
+// Запуск всех тестов
 test {
     useJUnitPlatform()
-    description = "Default task - runs all mobile tests"
+    description = "Запуск всех тестов"
+}
+
+// Запуск только smoke тестов
+task smoke_test(type: Test) {
+    group = "verification"
+    description = "Запуск только smoke тестов"
+    useJUnitPlatform {
+        includeTags("smoke")
+    }
 }

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.sleep;
 
-@Tag("mobile")
+@Tag("smoke")
 public class LibraryTest extends MobileTestBase {
 
     SqlPracticeScreen sqlScreen = new SqlPracticeScreen();
@@ -17,6 +17,7 @@ public class LibraryTest extends MobileTestBase {
 
     @Test
     @DisplayName("Проверка библиотеки SQL Practice PRO")
+
     void libraryTest() {
         // Шаг 1: Обрабатываем приветственное меню
         sqlScreen.clickOkButton();

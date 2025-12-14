@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.screenshot;
 
-@Tag("mobile")
+
 public class SqlQueryTest extends MobileTestBase {
 
 
