@@ -1,7 +1,6 @@
 plugins {
     id 'java-library'
     id 'io.qameta.allure' version '2.11.2'
-    id "io.freefair.lombok" version "6.6.1"
 }
 
 group = 'org.example'
@@ -12,15 +11,12 @@ repositories {
 }
 
 def versions = [
-        aspectjWeaver: '1.9.21',
         selenide      : '6.19.1',
         allure        : '2.21.0',
         appium        : '8.5.1',
-        restAssured   : '5.5.2',
-        owner         : '1.0.12',
         junit         : '5.10.0',
         slf4j         : '2.0.7',
-        commons       : '2.14.0'
+        owner         : '1.0.12'
 ]
 
 allure {
@@ -39,44 +35,27 @@ allure {
 
 dependencies {
     testImplementation(
-            "org.aspectj:aspectjweaver:${versions.aspectjWeaver}",
             "org.slf4j:slf4j-simple:${versions.slf4j}",
-            "commons-io:commons-io:${versions.commons}",
             "org.aeonbits.owner:owner:${versions.owner}",
-            "org.junit.jupiter:junit-jupiter:${versions.junit}",
-            "org.assertj:assertj-core:3.24.2"
+            "org.junit.jupiter:junit-jupiter:${versions.junit}"
     )
     testImplementation(
             "com.codeborne:selenide:${versions.selenide}",
             "io.qameta.allure:allure-selenide:${versions.allure}",
-            "io.github.bonigarcia:webdrivermanager:5.6.3",
             "io.appium:java-client:${versions.appium}"
     )
-    testImplementation("io.rest-assured:rest-assured:${versions.restAssured}")
-    testImplementation("io.qameta.allure:allure-rest-assured:${versions.allure}")
 }
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
+
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
-}
-
-// --- FIX для FTL шаблонов ---
-tasks.processTestResources {
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
-    from('src/test/resources') {
-        include '**/*.ftl'
-    }
 }
 
 tasks.withType(Test) {
     useJUnitPlatform()
     systemProperties(System.getProperties())
-
-    // Добавить эти свойства для Selenoid
-    systemProperty "webDriverHost", System.getProperty("webDriverHost", "selenoid.autotests.cloud")
-    systemProperty "remoteUrl", System.getProperty("remoteUrl", "")
 
     testLogging {
         lifecycle {
@@ -86,27 +65,7 @@ tasks.withType(Test) {
     }
 }
 
-// --- РАЗДЕЛЕНИЕ ТЕСТОВ ПО ТЕГАМ ---
-
-// 1. Только API тесты
-task api_test(type: Test) {
-    group = "verification"
-    description = "Run only API tests"
-    useJUnitPlatform {
-        includeTags("api")
-    }
-}
-
-// 2. Только UI тесты
-task ui_test(type: Test) {
-    group = "verification"
-    description = "Run only UI tests"
-    useJUnitPlatform {
-        includeTags("ui")
-    }
-}
-
-// 3. Только MOBILE тесты
+// Задача для запуска всех мобильных тестов
 task mobile_test(type: Test) {
     group = "verification"
     description = "Run only MOBILE tests"
@@ -115,9 +74,8 @@ task mobile_test(type: Test) {
     }
 }
 
-
-// 4. Задача по умолчанию (при запуске ./gradlew test)
+// Задача по умолчанию
 test {
     useJUnitPlatform()
-    description = "Default task - runs all tests"
+    description = "Default task - runs all mobile tests"
 }

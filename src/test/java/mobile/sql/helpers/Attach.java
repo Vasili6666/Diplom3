@@ -1,4 +1,3 @@
-
 package mobile.sql.helpers;
 
 import io.qameta.allure.Attachment;

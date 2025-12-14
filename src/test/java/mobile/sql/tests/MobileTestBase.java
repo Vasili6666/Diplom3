@@ -23,25 +23,17 @@ public class MobileTestBase {
         Configuration.browserSize = null;
         Configuration.timeout = 60000;
 
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-
-        System.out.println("🚀 Настройка тестового окружения...");
     }
 
     @BeforeEach
     void startDriver() {
-        System.out.println("🎬 Инициализация драйвера...");
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
         open();
-
-
         startVideoRecording();
     }
 
     @AfterEach
     void addAttachments() {
-        System.out.println("📸 Сбор вложений для отчета...");
-
-
         VideoAttach.attachVideo();
 
         Attach.screenshotAs("Final screenshot");
@@ -53,7 +45,7 @@ public class MobileTestBase {
         try {
             AndroidDriver driver = (AndroidDriver) getWebDriver();
             driver.startRecordingScreen();
-            System.out.println("🎥 Запись видео запущена");
+
         } catch (Exception e) {
             System.out.println("⚠️ Не удалось запустить запись видео: " + e.getMessage());
         }

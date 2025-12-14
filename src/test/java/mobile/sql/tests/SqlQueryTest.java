@@ -1,21 +1,22 @@
 package mobile.sql.tests;
 
 import mobile.sql.helpers.Attach;
-import io.qameta.allure.Allure;
+import mobile.sql.screens.SqlPracticeScreen;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import mobile.sql.screens.SqlPracticeScreen;
 
 import static com.codeborne.selenide.Selenide.screenshot;
 
 @Tag("mobile")
 public class SqlQueryTest extends MobileTestBase {
 
-    @Test
-    void sqlQueryTest() {
-        Allure.description("Тест проверяет выполнение SQL запроса в приложении SQL Practice PRO");
 
-        SqlPracticeScreen sqlScreen = new SqlPracticeScreen();
+    SqlPracticeScreen sqlScreen = new SqlPracticeScreen();
+
+    @Test
+    @DisplayName("Выполнение SQL запроса в приложении SQL Practice PRO")
+    void sqlQueryTest() {
 
         sqlScreen
                 .clickOkButton()
@@ -27,6 +28,5 @@ public class SqlQueryTest extends MobileTestBase {
         screenshot("sql_query_results");
         Attach.screenshotAs("SQL Query Results");
         Attach.pageSource();
-
     }
 }
