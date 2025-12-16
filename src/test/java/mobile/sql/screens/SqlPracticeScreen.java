@@ -19,7 +19,7 @@ public class SqlPracticeScreen {
 
     private static final String SQL_QUERY = "SELECT Professor_Name, MAX(Salary) FROM SALARIES;";
 
-    @Step("Нажать кнопку OK в приветственном окне")
+    @Step("Нажать кнопку OK")
     public SqlPracticeScreen clickOkButton() {
         okButton.shouldBe(visible).click();
         return this;

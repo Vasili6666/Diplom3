@@ -22,7 +22,6 @@ public class MobileTestBase {
         Configuration.browser = EmulationDriver.class.getName();
         Configuration.browserSize = null;
         Configuration.timeout = 60000;
-
     }
 
     @BeforeEach
@@ -35,7 +34,6 @@ public class MobileTestBase {
     @AfterEach
     void addAttachments() {
         VideoAttach.attachVideo();
-
         Attach.screenshotAs("Final screenshot");
         Attach.pageSource();
         closeWebDriver();
@@ -45,7 +43,6 @@ public class MobileTestBase {
         try {
             AndroidDriver driver = (AndroidDriver) getWebDriver();
             driver.startRecordingScreen();
-
         } catch (Exception e) {
             System.out.println("⚠️ Не удалось запустить запись видео: " + e.getMessage());
         }

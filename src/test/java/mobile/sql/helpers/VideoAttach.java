@@ -17,21 +17,17 @@ public class VideoAttach {
     public static byte[] attachVideo() {
         try {
             AndroidDriver driver = (AndroidDriver) getWebDriver();
-
             String videoBase64 = driver.stopRecordingScreen();
 
             if (videoBase64 == null || videoBase64.isEmpty()) {
-
                 return new byte[0];
             }
 
             byte[] videoData = java.util.Base64.getDecoder().decode(videoBase64);
 
             if (videoData.length == 0) {
-
                 return new byte[0];
             }
-
 
             String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));
             saveVideoToFile(videoData, "test-video-" + timestamp);

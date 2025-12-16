@@ -27,11 +27,10 @@ public class EmulationDriver implements WebDriverProvider {
                 .setAppPackage(config.appPackage())
                 .setAppActivity(config.appActivity());
 
-
         try {
             return new AndroidDriver(new URL(config.appiumServerUrl()), options);
         } catch (MalformedURLException e) {
-            throw new RuntimeException(" Ошибка создания URL для Appium сервера", e);
+            throw new RuntimeException("Ошибка создания URL для Appium сервера", e);
         }
     }
 }
